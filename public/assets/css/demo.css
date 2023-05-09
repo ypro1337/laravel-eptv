@@ -105,3 +105,15 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+
+.badge {
+  display: inline-block;
+  min-width: 1em; /* em unit */
+  padding: .3em; /* em unit */
+  border-radius: 10%;
+  font-size: 10px;
+  text-align: center;
+  background: #1779ba;
+  color: #fefefe;
+}

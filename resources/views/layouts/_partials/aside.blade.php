@@ -72,7 +72,72 @@
 				</div>
 			</a>
 		</li>
+		<li class="menu-item {{ menuIsActive('roles.*') }}">
+			<a href="{{ route('roles.index') }}" class="menu-link">
+				<i class="menu-icon tf-icons bx bx-user"></i>
+				<div data-i18n="Roles management">
+					{{ __('Roles management') }}
+				</div>
+			</a>
+		</li>
 
+
+		<li class="menu-item {{ menuIsActive('permissions.*') }}">
+			<a href="{{ route('permissions.index') }}" class="menu-link">
+				<i class="menu-icon tf-icons bx bx-user"></i>
+				<div data-i18n="Permissions management">
+					{{ __('Permissions management') }}
+				</div>
+			</a>
+		</li>
+
+
+
+
+		<li class="menu-item {{ menuIsActive('sieges.*') }} {{ menuIsActive('structures.*') }} open" >
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">Account Settings</div>
+              </a>
+              <ul class="menu-sub">
+			  <li class="menu-item {{ menuIsActive('sieges.*') }}">
+				<a href="{{ route('sieges.index') }}" class="menu-link">
+					<div data-i18n="Sieges management">
+						{{ __('Les Sieges') }}
+					</div>
+					</a>
+			</li>
+			<li class="menu-item {{ menuIsActive('structures.*') }}">
+				<a href="{{ route('structures.index') }}" class="menu-link">
+					<div data-i18n="Structures management">
+						{{ __('Les Structures') }}
+					</div>
+					</a>
+			</li>
+
+            <li class="menu-item {{ menuIsActive('formations.*') }}">
+				<a href="{{ route('formations.index') }}" class="menu-link">
+					<div data-i18n="Formations management">
+						{{ __('Les Formations') }}
+					</div>
+					</a>
+			</li>
+
+
+			<li class="menu-item {{ menuIsActive('affectations.*') }}">
+				<a href="{{ route('affectations.index') }}" class="menu-link">
+					<div data-i18n="Affectation management">
+						{{ __('Les affectations') }}
+					</div>
+					</a>
+			</li>
+                <li class="menu-item">
+                  <a href="/pages/account-settings-connections" class="menu-link">
+                    <div data-i18n="Connections">Connections</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
 
 		<!-- <li class="menu-item">
 			<a href="javascript:void(0);" class="menu-link menu-toggle">

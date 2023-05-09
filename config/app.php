@@ -168,6 +168,8 @@ return [
          * Package Service Providers...
          */
         browner12\helpers\HelperServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+
 
         /*
          * Application Service Providers...

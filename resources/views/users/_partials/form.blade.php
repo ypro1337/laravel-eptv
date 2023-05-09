@@ -6,9 +6,21 @@
 	@endif
 
 	<div class="mb-3">
-		<x-label for="name" :value="__('Name')" />
-		<x-input type="text" name="name" id="name" :placeholder="__('Name')" :value="old('name', $user->name)" autofocus />
-		<x-invalid error="name" />
+		<x-label for="nom" :value="__('Nom')" />
+		<x-input type="text" name="nom" id="nom" :placeholder="__('Nom')" :value="old('nom', $user->nom)" autofocus />
+		<x-invalid error="nom" />
+	</div>
+
+	<div class="mb-3">
+		<x-label for="prenom" :value="__('Prénom')" />
+		<x-input type="text" name="prenom" id="prenom" :placeholder="__('Prénom')" :value="old('prenom', $user->prenom)" autofocus />
+		<x-invalid error="prenom" />
+	</div>
+
+	<div class="mb-3">
+		<x-label for="matricule" :value="__('Matricule')" />
+		<x-input type="text" name="matricule" id="matricule" :placeholder="__('Matricule')" :value="old('matricule', $user->matricule)" autofocus />
+		<x-invalid error="matricule" />
 	</div>
 
 	<div class="mb-3">
@@ -47,9 +59,22 @@
 	</div>
 	@endif
 
+
+	<div class="mb-3">
+                                <label for="password">Assign Roles</label>
+                                <select name="roles[]" class="form-control js-example-basic-multiple" multiple>
+								@foreach ($roles as $role)
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+      </div>
+
 	<div class="text-end">
 		<x-button type="submit" class="btn btn-primary" :value="$user->id ? __('Update') : __('Create')" />
 	</div>
 
 
 </form>
+
+
+

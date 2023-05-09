@@ -2,8 +2,9 @@
 	<table class="table table-striped table-bordered mb-4">
 		<thead>
 			<tr>
-				<th>{{ __('#') }}</th>
-				<th>{{ __('Name') }}</th>
+				<th>{{ __('Nom') }}</th>
+				<th>{{ __('Prénom') }}</th>
+				<th>{{ __('Matricule') }}</th>
 				<th>{{ __('Email') }}</th>
 				<th>{{ __('Is Verify') }}</th>
 				<th>{{ __('#') }}</th>
@@ -12,8 +13,11 @@
 		<tbody>
 			@forelse($users as $user)
 			<tr>
-				<td>{{ $user->id }}</td>
-				<td>{{ $user->name }}</td>
+				<td>{{ $user->nom }}</td>
+				<td>{{ $user->prenom }}</td>
+
+				<td>{{ $user->matricule }}</td>
+
 				<td>{{ $user->email }}</td>
 				<td>
 					<span class="badge bg-{{ $user->email_verified_at ? 'success' : 'danger' }}">

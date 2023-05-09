@@ -1,23 +1,54 @@
 <x-auth-layout title="Register">
 	<h4 class="mb-2">
-		{{ __('Adventure starts here 🚀') }}
+		{{ __('Inscription') }}
 	</h4>
-	<p class="mb-4">
-		{{ __('Make your app management easy and fun!') }}
-	</p>
+
 
 	<form id="formAuthentication" class="mb-3" action="{{ route('register') }}" method="POST">
 		@csrf
 		<div class="mb-3">
-			<x-label for="name" :value="__('Name')" />
-			<x-input type="text" name="name" id="name" :placeholder="__('Name')" :value="old('name')" autofocus />
-			<x-invalid error="name" />
+			<x-label for="nom" :value="__('Nom')" />
+			<x-input type="text" name="nom" id="nom" :placeholder="__('Nom')" :value="old('nom')" autofocus />
+			<x-invalid error="nom" />
+		</div>
+	
+		<div class="mb-3">
+			<x-label for="prenom" :value="__('Prénom')" />
+			<x-input type="text" name="prenom" id="prenom" :placeholder="__('Prénom')" :value="old('prenom')" autofocus />
+			<x-invalid error="prenom" />
+		</div>
+	
+		<div class="mb-3">
+			<x-label for="matricule" :value="__('Matricule')" />
+			<x-input type="text" name="matricule" id="matricule" :placeholder="__('Matricule')" :value="old('matricule')" autofocus />
+			<x-invalid error="matricule" />
 		</div>
 		<div class="mb-3">
 			<x-label for="email" :value="__('Email')" />
 			<x-input type="email" name="email" id="email" :placeholder="__('Email')" :value="old('email')" />
 			<x-invalid error="email" />
 		</div>
+
+		<div class="mb-3">
+			<x-label for="affectation_date" :value="__('Date d affectation')" />
+			<x-input type="date" name="affectation_date" id="affectation_date" :placeholder="__('Date d affectation')" :value="old('affectation_date')" autofocus />
+			<x-invalid error="affectation_date" />
+		</div>
+
+
+		<div class="mb-3">
+			<label for="structure_id">Affectation Structure</label>
+								<select name="structure_id" id="js-example-basic-single" class="form-control js-example-basic-single">
+									<option value="" >None</option>
+									{!! recursiveAddStructureDropdown($structures,'',0,old('structure_id')) !!}
+								</select>
+			@error('structure_id')
+			<span class="invalid-feedback">{{ $message }}</span>
+			@enderror
+		</div>
+
+
+	
 		<div class="mb-3 form-password-toggle">
 			<div class="d-flex justify-content-between">
 				<x-label for="password" :value="__('Password')" />

@@ -50,6 +50,9 @@
 	<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 	<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 	<script src="{{ asset('assets/js/config.js') }}"></script>
+
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -98,7 +101,7 @@
 										</g>
 									</svg>
 								</span>
-								<span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+								<span class="app-brand-text demo text-body fw-bolder">Établissement Public de Télévision</span>
 							</a>
 						</div>
 						<!-- /Logo -->
@@ -129,6 +132,20 @@
 	<!-- Main JS -->
 	<script src="{{ asset('assets/js/main.js') }}"></script>
 	<script src="{{ asset('assets/js/custom.js') }}"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+
+<script>
+$(".js-example-basic-single").select2({
+  theme: "classic"
+});
+
+$(".js-example-basic-multiple").select2({
+  theme: "classic"
+});
+</script>
 	@stack('js')
 </body>
 

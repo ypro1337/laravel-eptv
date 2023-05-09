@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -16,6 +18,7 @@ class UserController extends Controller
 	public function index()
 	{
 		$users = User::latest()->paginate();
+		
 		return view('users.index', compact('users'));
 	}
 
@@ -27,7 +30,10 @@ class UserController extends Controller
 	public function create()
 	{
 		$user = new User;
-		return view('users.create', compact('user'));
+        $roles  = Role::all();
+
+
+		return view('users.create', compact('user','roles'));
 	}
 
 	/**
@@ -39,7 +45,10 @@ class UserController extends Controller
 	public function store(Request $request)
 	{
 		$data = $request->validate([
-			'name' => 'required|string',
+			'nom' => 'required|string',
+			'prenom' => 'required|string',
+			'matricule' => 'required|string|unique:users,matricule',
+
 			'email' => 'required|string|email|unique:users',
 			'password' => 'required|confirmed',
 		]);
@@ -47,7 +56,13 @@ class UserController extends Controller
 		$data['password'] = Hash::make($data['password']);
 		$data['email_verified_at'] = now();
 
-		User::create($data);
+
+		$user = User::create($data);
+        if ($request->roles) {
+            $user->assignRole($request->roles);
+        }
+
+
 
 		return to_route('users.index')->withSuccess('Data succcessfully created.');
 	}
@@ -63,15 +78,13 @@ class UserController extends Controller
 		//
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
+
 	public function edit(User $user)
 	{
-		return view('users.edit', compact('user'));
+        $roles = Role::all();
+        $userRole = $user->roles->pluck('name','name')->all();
+
+		return view('users.edit', compact('user','roles','userRole'));
 	}
 
 	/**
@@ -84,7 +97,9 @@ class UserController extends Controller
 	public function update(Request $request, User $user)
 	{
 		$request->validate([
-			'name' => 'required|string',
+			'nom' => 'required|string',
+			'prenom' => 'required|string',
+			'matricule' => 'required|string|unique:users,matricule,' . $user->id,
 			'email' => 'required|string|email|unique:users,email,' . $user->id,
 			'password' => $request->password ? 'required|confirmed' : '',
 		]);
@@ -95,7 +110,15 @@ class UserController extends Controller
 		}
 		$data['email'] = $request->email;
 
+
+
 		$user->update($data);
+
+        $user->roles()->detach();
+        if ($request->roles) {
+            $user->assignRole($request->roles);
+        }
+
 
 		return to_route('users.index')->withSuccess('Data succcessfully updated.');
 	}
